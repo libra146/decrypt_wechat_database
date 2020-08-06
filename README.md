@@ -23,7 +23,7 @@ Dockerfile 采用多阶段构建模式。
 
 使用`docker run --rm -it -v /home/xxx/xxx/:/root/android/data -e password=xxxxxx decrypt_wechat_database`命令，
 
-将包含 bak 文件的文件夹 (/home/xxx/xxx/) 挂载到 `/root/android/data` 目录 (这个目录不可自定义) 下，即可，同时不要忘了使用 `-e` 命令定义微信数据库密码。
+将包含 bak 文件的文件夹 (/home/xxx/xxx/) 挂载到 `/root/android/data` 目录 (这个目录不可自定义) 下即可，同时不要忘了使用 `-e` 命令定义微信数据库密码。
 
 后续可能会尝试自动解密，待补充。
 
