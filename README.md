@@ -21,7 +21,7 @@ Dockerfile 采用多阶段构建模式。
 
 首先需要安装 docker，然后需要一个可读写的目录，将手机上备份好的文件放到文件夹中。
 
-使用`docker run --rm -it -v /home/xxx/xxx/:/root/android/data -e password=xxxxxx decrypt_wechat_database`命令，
+使用`docker run --rm -it -v /home/xxx/xxx/:/root/android/data -e password=xxxxxx libra146/decrypt_wechat_database`命令，
 
 将包含 bak 文件的文件夹 (/home/xxx/xxx/) 挂载到 `/root/android/data` 目录 (这个目录不可自定义) 下即可，同时不要忘了使用 `-e` 命令定义微信数据库密码。
 
@@ -36,7 +36,7 @@ password is xxxxxx!
 success!
 ```
 
-
+解密成功后文件夹中会生成一个类似于 decrypt-1596704094498-EnMicroMsg.db 的文件。decrypt 开头，中间是时间戳，防止文件名重复，后面是微信数据库原始的文件名。
 
 ### 用到的工具
 
