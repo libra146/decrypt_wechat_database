@@ -42,9 +42,10 @@ if __name__ == '__main__':
     list_dir()
     # 解密数据库
     if os.system('./decrypt') != 0:
+        # 解密失败删掉生成的空文件，复制出未解密的文件
         print('decrypt failed!')
+        os.system('rm decrypt-*')
         os.system('cp *.db ./data')
-        os.system('rm *.db')
         os.system('rm *.bak')
     else:
         os.system('cp decrypt-* ./data')
