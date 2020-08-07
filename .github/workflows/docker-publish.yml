@@ -6,11 +6,9 @@ on:
   #    branches:
   #      - master
   #
-  #    # Publish `v1.2.3` tags as releases.
-  #    tags:
-  #      - v*
-  label:
-    types: [created, deleted]
+  # Publish `v1.2.3` tags as releases.
+  tags:
+    - v*
 
 env:
   # TO# DO : Change variable to your image's name.
