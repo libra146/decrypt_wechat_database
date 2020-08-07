@@ -1,7 +1,7 @@
 name: Docker
 
 on:
-#  push:
+  #  push:
   #    # Publish `master` as Docker `latest` image.
   #    branches:
   #      - master
@@ -9,9 +9,9 @@ on:
   #    # Publish `v1.2.3` tags as releases.
   #    tags:
   #      - v*
-  release:
-    types:
-      - created
+  label:
+    types: [created, deleted]
+
 env:
   # TO# DO : Change variable to your image's name.
   IMAGE_NAME: decrypt_wechat_database
