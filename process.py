@@ -18,14 +18,16 @@ def process():
                                 break
                             ff.write(data)
             unpack(f'{splitext(a)[0]}_process.bak')
-            os.system(f'rm {splitext(a)[0]}_process.bak')
+            if delete:
+                os.system(f'rm {splitext(a)[0]}_process.bak')
 
 
 def unpack(filename):
     os.system(f'java -jar abe-all.jar unpack {filename} {splitext(filename)[0]}_unpack.tar')
     if os.path.exists(f'{splitext(filename)[0]}_unpack.tar'):
         os.system(f'tar -xf {splitext(filename)[0]}_unpack.tar')
-        os.system(f'rm {splitext(filename)[0]}_unpack.tar')
+        if delete:
+            os.system(f'rm {splitext(filename)[0]}_unpack.tar')
 
 
 def list_dir():
@@ -33,10 +35,12 @@ def list_dir():
         for a in files:
             if a == 'EnMicroMsg.db':
                 copyfile(f'{path}/{a}', f'{int(time.time() * 1000)}-EnMicroMsg.db')
-                rmtree('./apps')
+                if delete:
+                    rmtree('./apps')
 
 
 if __name__ == '__main__':
+    delete = os.getenv('deleted') or 1
     os.system('cp ./data/*.bak ./')
     process()
     list_dir()
@@ -46,9 +50,11 @@ if __name__ == '__main__':
         print('decrypt failed!')
         os.system('rm decrypt-*')
         os.system('cp *.db ./data')
-        os.system('rm *.bak')
+        if delete:
+            os.system('rm *.bak')
     else:
         os.system('cp decrypt-* ./data')
-        os.system('rm *.db')
-        os.system('rm *.bak')
+        if delete:
+            os.system('rm *.db')
+            os.system('rm *.bak')
         print('success!')
