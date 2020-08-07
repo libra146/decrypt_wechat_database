@@ -40,7 +40,8 @@ def list_dir():
 
 
 if __name__ == '__main__':
-    delete = os.getenv('deleted') or 1
+    delete = os.getenv('deleted') or '1'
+    delete = int(delete)
     os.system('cp ./data/*.bak ./')
     process()
     list_dir()
