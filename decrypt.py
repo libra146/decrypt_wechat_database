@@ -1,12 +1,21 @@
 import os
 import sys
+from hashlib import md5
 
 from pysqlcipher import dbapi2 as sqlite
 
 
 def decrypt(key):
     if not key:
-        print('key is empty!!!')
+        print('evn key is empty!!!')
+    uin = sys.argv[1] if len(sys.argv) >= 2 else ''
+    if uin:
+        print('uin is {}!'.format(uin))
+        m = md5()
+        m.update('1234567890ABCDEF'.encode() + uin.encode())
+        key = m.hexdigest()[:7]
+    if not uin:
+        print('uin is empty!')
         sys.exit(-1)
     print('password is {}!'.format(key))
     for name in os.listdir('.'):

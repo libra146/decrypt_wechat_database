@@ -3,6 +3,8 @@ import time
 from os.path import splitext
 from shutil import copyfile, rmtree
 
+import javaobj
+
 
 def process():
     for a in os.listdir('.'):
@@ -31,12 +33,19 @@ def unpack(filename):
 
 
 def list_dir():
+    _uin = ''
     for path, dirs, files in os.walk('./apps'):
         for a in files:
             if a == 'EnMicroMsg.db':
                 copyfile(f'{path}/{a}', f'{int(time.time() * 1000)}-EnMicroMsg.db')
-                if delete:
-                    rmtree('./apps')
+        if 'systemInfo.cfg' in files:
+            with open(f'{path}/systemInfo.cfg', "rb") as fd:
+                obj = javaobj.loads(fd.read())
+                _uin = obj[1]
+    if delete:
+        rmtree('./apps')
+    if _uin:
+        return str(_uin)
 
 
 if __name__ == '__main__':
@@ -44,9 +53,9 @@ if __name__ == '__main__':
     delete = int(delete)
     os.system('cp ./data/*.bak ./')
     process()
-    list_dir()
+    uin = list_dir()
     # 解密数据库
-    if os.system('./decrypt') != 0:
+    if os.system(f'./decrypt {uin if uin else ""}') != 0:
         # 解密失败删掉生成的空文件，复制出未解密的文件
         print('decrypt failed!')
         os.system('rm decrypt-*')
