@@ -35,7 +35,7 @@ RUN ls && \
 apt-get update && \
 apt-get install -y --fix-missing python3 python3-pip && \
 # -i https://mirrors.aliyun.com/pypi/simple --trusted-host mirrors.aliyun.com/pypi/simple/
-python3 -m pip install pyinstaller javaobj-py3
+python3 -m pip install pyinstaller javaobj-py3 lxml
 # 上边是环境配置，使用一条RUN指令，下方是编译程序，使用另一条RUN指令，可以防止只使用一条RUN指令导致每次更改程序都需要重新配置环境，方便测试
 RUN pyinstaller -F --distpath ./ process.py
 
