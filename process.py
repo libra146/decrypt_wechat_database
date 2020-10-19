@@ -1,3 +1,10 @@
+##!/usr/bin/python3
+# -*- coding: utf-8 -*-
+# @Time    : 2020-10-19 09:31:00
+# @Author  : Libra
+# @Email   : 146232616@qq.com
+# @File    : process.py
+
 import os
 import time
 from hashlib import md5
